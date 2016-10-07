@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+  slim_adr_nginx:
+    image: nginx:stable
+    networks:
+      - slim_adr
+    ports:
+      - "80:80"
+    volumes_from:
+      - slim_adr_phpfpm:ro
+    volumes:
+      - ./docker/nginx/sites.conf:/etc/nginx/conf.d/default.conf
+
+  slim_adr_phpfpm:
+    build:
+      context: ./docker/phpfpm
+    networks:
+      - slim_adr
+    expose:
+      - 9000
+    volumes:
+      - ./:/var/www/slim_adr
+      - ./docker/phpfpm/php.timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+      - ./docker/phpfpm/php.error.ini:/usr/local/etc/php/conf.d/error.ini
+    working_dir: /var/www/slim_adr
+
+  slim_adr_mysql:
+     image: mysql:5.6
+     networks:
+      - slim_adr
+     expose:
+      - 3306
+     ports:
+      - "3306:3306"
+     environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=slim_adr
+     volumes_from:
+      - slim_adr_data
+
+  slim_adr_data:
+     image: tianon/true
+     volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+
+  slim_adr_phpmyadmin:
+    image: nazarpc/phpmyadmin
+    ports:
+      - "1234:80"
+    links:
+      - slim_adr_mysql:mysql
+    networks:
+      - slim_adr
+
+networks:
+  slim_adr:
+    driver: bridge
