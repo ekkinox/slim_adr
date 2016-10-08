@@ -32,7 +32,7 @@ docker exec -it <FPM_CONTAINER_ID> vendor/bin/doctrine o:s:u --dump-sql --force
 
 ## Author
 
-[Jonathan VUILLEMIN](ekkinox@gmail.com) - 2016
+[Jonathan VUILLEMIN](https://github.com/ekkinox) - 2016
 
 ## Licence
 
