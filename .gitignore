@@ -1,5 +1,6 @@
 .idea
 vendor
 coverage
-var
+var/cache/twig
+var/cache/doctrine
 docker/mysql/*

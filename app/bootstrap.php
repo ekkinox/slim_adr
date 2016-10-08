@@ -1,17 +1,11 @@
 <?php
 
-use \Slim\App as Application;
+use Ekkinox\SlimADR\SlimADRApp;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$configurationFiles = [
-    __DIR__ . '/routing.php'
-];
+$app = new SlimADRApp();
 
-$app = new Application();
-
-foreach ($configurationFiles as $configurationFile) {
-    require $configurationFile;
-}
+require __DIR__ . '/routing.php';
 
 $app->run();

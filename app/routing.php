@@ -2,4 +2,6 @@
 
 use Ekkinox\SlimADR\Action\DashboardAction;
 
-$app->get('/[{name}]', DashboardAction::class);
+$app
+    ->get('/[{name}]', DashboardAction::class)
+    ->setName('dashboard');

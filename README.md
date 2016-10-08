@@ -24,6 +24,12 @@ Then run provided Docker stack
 $ docker-compose up -d
 ```
 
+Install database schema with Doctrine
+
+```bash
+docker exec -it <FPM_CONTAINER_ID> vendor/bin/doctrine o:s:u --dump-sql --force
+```
+
 ## Author
 
 [Jonathan VUILLEMIN](ekkinox@gmail.com) - 2016

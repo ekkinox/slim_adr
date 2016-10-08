@@ -1,0 +1,16 @@
+Hello {{ name }} fsdfs
+
+
+<p>Users:</p>
+
+{% for user in users %}
+    <ul>
+        <li>Id : {{ user.id }}</li>
+        <li>Username : {{ user.username }}</li>
+        <li>Email : {{ user.email }}</li>
+    </ul>
+{% else %}
+    <ul>
+        <li>No users found.</li>
+    </ul>
+{% endfor %}

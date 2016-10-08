@@ -2,9 +2,10 @@
 
 namespace Ekkinox\SlimADR\Action;
 
+use Ekkinox\SlimADR\Manager\User\UserManager;
+use Ekkinox\SlimADR\Responder\Dashboard\DashboardResponder;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Interop\Container\ContainerInterface;
 
 /**
  * Class MyAction
@@ -14,31 +15,40 @@ use Interop\Container\ContainerInterface;
 class DashboardAction
 {
     /**
-     * @var ContainerInterface
+     * @var DashboardResponder
      */
-    protected $container;
+    protected $responder;
 
     /**
-     * @param ContainerInterface $container
+     * @var UserManager
      */
-    public function __construct(ContainerInterface $container)
+    protected $manager;
+
+    /**
+     * @param DashboardResponder $responder
+     * @param UserManager        $manager
+     */
+    public function __construct(DashboardResponder $responder, UserManager $manager)
     {
-        $this->container = $container;
+        $this->responder = $responder;
+        $this->manager   = $manager;
     }
 
     /**
      * @param Request  $request
      * @param Response $response
-     * @param array    $args
+     * @param string   $name
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args): Response
+    public function __invoke(Request $request, Response $response, $name = null): Response
     {
-        $response->getBody()->write(
-            sprintf('Hello %s', $args['name'] ?? 'visitor')
+        return $this->responder->render(
+            $response,
+            [
+                'name'  => $name ?? 'visitor',
+                'users' => $this->manager->findAll()
+            ]
         );
-
-        return $response;
     }
 }
