@@ -2,18 +2,18 @@
 
 return [
 
-    // Slim settings
+    // Slim framework settings
     'settings.displayErrorDetails' => true,
 
     // Doctrine
-    'doctrine' => [
+    'settings.doctrine' => [
         'meta' => [
             'entity_path' => [
                 __DIR__ . '/../src/Entity'
             ],
             'auto_generate_proxies' => true,
-            'proxy_dir' =>  __DIR__.'/../var/cache/doctrine/proxies',
-            'cache' => null,
+            'proxy_dir'   =>  __DIR__.'/../var/cache/doctrine/proxies',
+            'cache'       => null,
         ],
         'connection' => [
             'driver'   => 'pdo_mysql',
@@ -22,6 +22,13 @@ return [
             'user'     => 'root',
             'password' => 'root',
         ]
-    ]
+    ],
 
+    // Twig
+    'settings.twig' => [
+        'path'     => __DIR__ . '/../src/Views',
+        'settings' => [
+            'cache' => __DIR__ . '/../var/cache/twig'
+        ]
+    ],
 ];
