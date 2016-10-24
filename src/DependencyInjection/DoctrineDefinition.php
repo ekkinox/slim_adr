@@ -28,7 +28,6 @@ class DoctrineDefinition extends AbstractContainerDefinition
     {
         return [
             EntityManager::class => function (ContainerInterface $container) {
-
                 $settings = $this->getSettings($container);
 
                 $config = Setup::createAnnotationMetadataConfiguration(

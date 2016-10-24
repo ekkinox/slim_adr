@@ -11,7 +11,7 @@ use Slim\Views\TwigExtension;
  *
  * @package Ekkinox\SlimADR\DependencyInjection
  */
-class ValidatorDefinition implements ContainerDefinitionInterface
+class FormDefinition implements ContainerDefinitionInterface
 {
     /**
      * @inheritdoc
@@ -26,6 +26,5 @@ class ValidatorDefinition implements ContainerDefinitionInterface
      */
     public function __invoke()
     {
-
     }
 }

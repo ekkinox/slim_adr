@@ -28,7 +28,6 @@ class TwigDefinition extends AbstractContainerDefinition
     {
         return [
             Twig::class => function (ContainerInterface $container) {
-
                 $settings = $this->getSettings($container);
 
                 $twig = new Twig($settings['path'], $settings['settings']);

@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 
 $settings = include __DIR__ . '/app/config.php';
 
-$settings = $settings['doctrine'];
+$settings = $settings['settings.doctrine'];
 
 $config = Setup::createAnnotationMetadataConfiguration(
     $settings['meta']['entity_path'],
